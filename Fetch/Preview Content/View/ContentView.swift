@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ContentView: View {
     @State private var recipes: [Recipes] = []
@@ -14,40 +15,44 @@ struct ContentView: View {
         NavigationView {
             List(recipes, id: \.uuid) { recipe in
                 
-                    HStack(alignment: .top) {
-                        AsyncImage(url: URL(string: recipe.photoUrlSmall ?? "photo")) { phase in
-                            if let image = phase.image {
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 80, height: 80)
-                                    .cornerRadius(10)
-                            } else if phase.error != nil {
-                                Image(systemName: "photo")
-                                    .font(.title)
-                                    .padding()
-                            } else {
+                HStack {
+                    if let url = URL(string: recipe.photoUrlSmall ?? "hello") {
+                        KFImage(url)
+                            .placeholder {
                                 ProgressView()
                             }
-                        }
-                        VStack(alignment: .leading) {
-                            Text(recipe.name)
-                                .font(.headline)
-                            Text(recipe.cuisine)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(.circle)
+                            .shadow(radius: 10)
+                            .frame(width: 100, height: 100)
+                            .padding(20)
                     }
+                    
+                    VStack(alignment: .leading) {
+                        Text(recipe.name)
+                            .font(.headline)
+                            .fontWidth(.compressed)
+                        Text(recipe.cuisine)
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        
+                    }
+                }
                 
             }
+            
             .navigationTitle("Recipes")
         }
         .onAppear {
-            appMine()
+            Task {
+                await getRecipes()
+            }
+            
         }
     }
-
-    func appMine() {
+    
+    func getRecipes() async {
         Task {
             let url = "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json"
             guard let myURL = URL(string: url) else { return }
@@ -56,9 +61,8 @@ struct ContentView: View {
             do {
                 let (data, _) = try await URLSession.shared.data(for: request)
                 let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                decoder.keyDecodingStrategy = .useDefaultKeys
                 let gitData = try decoder.decode(RecipeResponse.self, from: data)
-                
                 await MainActor.run {
                     self.recipes = gitData.recipes
                 }

@@ -19,13 +19,12 @@ struct Recipes: Codable, Identifiable {
     var id: String { uuid }
     
     enum CodingKeys: String, CodingKey {
-        case uuid
-        case name
-        case cuisine
+
         case photoUrlLarge = "photo_url_large"
         case photoUrlSmall = "photo_url_small"
         case sourceUrl = "source_url"
         case youtubeUrl = "youtube_url"
+        case uuid, name, cuisine
     }
 }
 

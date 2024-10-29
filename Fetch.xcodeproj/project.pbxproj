@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		84D2FA0D2CD0B51C007B47E8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 84D2FA0C2CD0B51C007B47E8 /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		84257CEA2CD094D300B4B1D4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84D2FA0D2CD0B51C007B47E8 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = Fetch;
 			packageProductDependencies = (
+				84D2FA0C2CD0B51C007B47E8 /* Kingfisher */,
 			);
 			productName = Fetch;
 			productReference = 84257CD92CD094D100B4B1D4 /* Fetch.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 84257CD02CD094D100B4B1D4;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				84D2FA0B2CD0B51C007B47E8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 84257CDA2CD094D100B4B1D4 /* Products */;
 			projectDirPath = "";
@@ -558,6 +567,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		84D2FA0B2CD0B51C007B47E8 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		84D2FA0C2CD0B51C007B47E8 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84D2FA0B2CD0B51C007B47E8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 84257CD12CD094D100B4B1D4 /* Project object */;
 }
